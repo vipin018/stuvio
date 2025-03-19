@@ -23,20 +23,21 @@ const App = () => {
       y: isHovering ? "0%" : "100%",
       opacity: isHovering ? 1 : 0,
       duration: 0.85,
-      ease: "power3.out"
+      ease: "sine.inOut"
+      
     });
 
     gsap.to(containerRef.current.children[index], {
-      scale: isHovering ? 1.02 : 1,
       duration: 0.7,
-      ease: "power2.out"
+      ease: "sine.inOut"
+      
     });
 
     gsap.to(titleRefs.current[index], {
       y: isHovering ? -10 : 0,
-      color: isHovering ? "#000" : "#333",
+      color: isHovering ? "#fff" : "#333",
       duration: 0.6,
-      ease: "power2.inOut"
+      ease: "sine.inOut"
     });
   };
 
@@ -53,8 +54,8 @@ const App = () => {
 
     masterTl.fromTo(
       textRefs.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 },
+      { opacity: 0, y: 30, },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2,  },
       "-=0.5"
     );
 
