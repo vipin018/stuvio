@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 
 const images = [
-  "https://images.unsplash.com/photo-1526827826797-7b05204a22ef?q=80&w=1974&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?q=80&w=1974&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1631561158446-086cebb5df8d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2127&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1653971858418-e445eb369681?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1680224806260-82fbaeb52645?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1519643225200-94e79e383724?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ];
 
 const App = () => {
@@ -36,13 +36,26 @@ const App = () => {
                 <h1>Visionary</h1>
               </div>
             )}
+            {index === 1 && (
+              <div className="absolute top-4 left-4 font-normal text-black z-20 p-2">
+                <p className='text-xl w-2/3 text-center'>Where Form and Function Unite </p>
+              </div>
+            )}
+            {index === 2 && index=== 3 && (
+              <div className="absolute top-4 left-4 text-3xl font-normal text-black z-20 p-2">
+                <p className='text-xl w-2/3 text-center'>Where Form and Function Unite </p>
+              </div>
+            )}
             
+
+
+
             {/* Text for each div with line break */}
             <h1 className='text-4xl font-medium absolute bottom-0 left-0 text-black z-10 p-10'>
-              {index === 0 ? <>OUR <br /> APPROACH</> 
-              : index === 1 ? <>OUR <br /> TECHNOLOGY</> 
-              : index === 2 ? <>OUR <br /> STORY</> 
-              : <>OUR <br /> DESIGN TEAM</>}
+              {index === 0 ? <>OUR <br /> APPROACH</>
+                : index === 1 ? <>OUR <br /> TECHNOLOGY</>
+                  : index === 2 ? <>OUR <br /> STORY</>
+                    : <>OUR <br /> DESIGN TEAM</>}
             </h1>
           </div>
           <img
