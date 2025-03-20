@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import Cursor from './Components/Cursor';
 import ImageSection from './Components/ImageSection';
@@ -17,20 +17,16 @@ const App = () => {
   const imageRefs = useRef([]);
   const textRefs = useRef([]);
   const titleRefs = useRef([]);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleHover = (index, isHovering) => {
+    if (expandedIndex !== null) return;
+
     gsap.to(imageRefs.current[index], {
       y: isHovering ? "0%" : "100%",
       opacity: isHovering ? 1 : 0,
       duration: 0.85,
       ease: "sine.inOut"
-      
-    });
-
-    gsap.to(containerRef.current.children[index], {
-      duration: 0.7,
-      ease: "sine.inOut"
-      
     });
 
     gsap.to(titleRefs.current[index], {
@@ -39,6 +35,51 @@ const App = () => {
       duration: 0.6,
       ease: "sine.inOut"
     });
+
+    gsap.to(textRefs.current[index], {
+      color: isHovering ? "#fff" : "#333",
+      duration: 0.6,
+      ease: "sine.inOut"
+    });
+  };
+
+  const handleClick = (index) => {
+    const image = imageRefs.current[index];
+    const section = containerRef.current.children[index];
+
+    if (expandedIndex === index) {
+      // Collapse Animation
+      gsap.to(image, {
+        scale: 1,
+        x: 0,
+        y: 0,
+        duration: 1,
+        ease: "power3.inOut"
+      });
+      gsap.to(section, {
+        zIndex: 1,
+        duration: 0.5
+      });
+      setExpandedIndex(null);
+    } else {
+      // Expand Animation
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const rect = section.getBoundingClientRect();
+
+      gsap.to(image, {
+        scale: Math.max(viewportWidth / rect.width, viewportHeight / rect.height),
+        x: -rect.left + viewportWidth / 2 - rect.width / 2,
+        y: -rect.top + viewportHeight / 2 - rect.height / 2,
+        duration: 1,
+        ease: "power3.inOut"
+      });
+      gsap.to(section, {
+        zIndex: 10,
+        duration: 0.5
+      });
+      setExpandedIndex(index);
+    }
   };
 
   useEffect(() => {
@@ -54,8 +95,8 @@ const App = () => {
 
     masterTl.fromTo(
       textRefs.current,
-      { opacity: 0, y: 30, },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2,  },
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 },
       "-=0.5"
     );
 
@@ -79,6 +120,7 @@ const App = () => {
             className="relative w-1/4 overflow-hidden border-r-2 border-gray-200 transition-all duration-500"
             onMouseEnter={() => handleHover(index, true)}
             onMouseLeave={() => handleHover(index, false)}
+            onClick={() => handleClick(index)}
           >
             <TextSection index={index} textRef={(el) => textRefs.current[index] = el} />
             <TitleSection index={index} titleRef={(el) => titleRefs.current[index] = el} />
