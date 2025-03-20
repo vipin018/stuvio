@@ -31,7 +31,7 @@ const App = () => {
 
     gsap.to(titleRefs.current[index], {
       y: isHovering ? -10 : 0,
-      color: isHovering ? "#fff" : "#333",
+      color: isHovering ? "transparent" : "#333",
       duration: 0.6,
       ease: "sine.inOut"
     });
@@ -67,16 +67,18 @@ const App = () => {
       const viewportHeight = window.innerHeight;
       const rect = section.getBoundingClientRect();
 
-      gsap.to(image, {
+      gsap.to(section, {
         scale: Math.max(viewportWidth / rect.width, viewportHeight / rect.height),
         x: -rect.left + viewportWidth / 2 - rect.width / 2,
         y: -rect.top + viewportHeight / 2 - rect.height / 2,
         duration: 1,
         ease: "power3.inOut"
       });
-      gsap.to(section, {
+      gsap.to(image, {
         zIndex: 10,
-        duration: 0.5
+        duration: 0.5,
+        ease: "power3.inOut",
+        obj
       });
       setExpandedIndex(index);
     }
